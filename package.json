@@ -2,7 +2,7 @@
     "name": "react-svg-oops",
     "version": "1.0.1",
     "description": "this is package for drawing charts easily.",
-    "main": "index.js",
+    "main": "lib/index.js",
     "scripts": {
         "gulp": "gulp",
         "build": "babel src -d ./lib",
