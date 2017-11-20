@@ -1,0 +1,20 @@
+{
+	"presets": ["react", ["env", {
+		"targets": {
+			"browsers": ["last 2 versions", "safari >= 7"]
+		}
+	}], "stage-0"],
+	"plugins": ["transform-react-jsx", "lodash", [
+			"react-css-modules", {
+				"filetypes": {
+					".less": {
+						"syntax": "postcss-less"
+					}
+				},
+				"webpackHotModuleReloading": true,
+				"generateScopedName": "[name]__[local]__[hash:base64:5]",
+				"exclude": "node_modules"
+			}
+		]
+	]
+}
