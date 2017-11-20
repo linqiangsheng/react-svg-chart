@@ -72,7 +72,7 @@ module.exports = {
 	devServer: devServer,
 	module: {
 		rules: [
-			lessLoader(path.resolve(__dirname, '..', 'src'), true),
+			lessLoader(path.resolve(__dirname, '..', 'style'), true),
 			{
 				//加载组件内部依赖的css
 				test: /\.css$/,
@@ -86,7 +86,7 @@ module.exports = {
 				}]
 			}, {
 				test: /\.js$/,
-				exclude: /(node_modules|bower_components|public)/,
+				exclude: /(node_modules|bower_components)/,
 				loaders: [{
 					loader: 'babel-loader?cacheDirectory' //使用babel-loader对js进行装载，具体看.babelrc
 				}]

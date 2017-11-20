@@ -2,7 +2,7 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { map, partial } from 'lodash';
 import utils from '../helpers/utils.js';
-// import './chart.less';
+import '../style/chart.less';
 
 const ANGEL = 40, //起始角度
 	VIEWBOX_SIZE = 300, //视图大小
@@ -123,17 +123,17 @@ export default class CircleChart extends React.Component {
 		if (prev < next) {
 			nextPrev = prev + speed > next ? next : prev + speed;
 			for (let i = Math.floor(prev); i < nextPrev; i++) {
-				this.elScales.children[i] && this.elScales.children[i].setAttribute('style', 'fill: red;stroke: #FFF;stroke-width: 1;stroke-opacity: 0.6;');
+				this.elScales.children[i] && this.elScales.children[i].setAttribute('class', 'scale');
 			}
 			window.requestAnimationFrame(partial(this.move, nextPrev, next, speed));
 		} else if (prev > next) {
 			nextPrev = prev - speed < next ? next : prev - speed;
 			for (let i = Math.ceil(prev); i > nextPrev; i--) {
-				this.elScales.children[i] && this.elScales.children[i].setAttribute('style', '');
+				this.elScales.children[i] && this.elScales.children[i].setAttribute('class', '');
 			}
 			window.requestAnimationFrame(partial(this.move, nextPrev, next, speed));
 		} else {
-			this.elScales.children[prev] && this.elScales.children[prev].setAttribute('style', 'fill: red; stroke: #fff; stroke-width: 2; stroke-opacity: 1;');
+			this.elScales.children[prev] && this.elScales.children[prev].setAttribute('class', 'scale-site');
 		}
 
 	}
@@ -179,7 +179,7 @@ export default class CircleChart extends React.Component {
 				<path id={this.scaleId}
 					d={`M 0 0 h ${width}`}/>
 			</defs>
-			<g ref="scales">
+			<g ref="scales" styleName="scales">
 				{map(paths, (item, index) => {
 					const {x, y, angel} = item;
 					return <use key={index} xlinkHref={`#${this.scaleId}`}
@@ -202,10 +202,11 @@ export default class CircleChart extends React.Component {
 		// const fontSize = 200 / (value + '').replace(/\./, '').length + 'px';
 		return <g>
 			<text x="50%" y="50%"
-				style={{fontSize: fontSize, fontFamily: 'sans-serif', fontWeight: 'bold', textAnchor: 'middle', dominantBaseline: 'middle'}}
+				style={{fontSize: fontSize}}
+				styleName="text-value"
 				fill={`url(#${this.gradientId})`}>{value > max ? max : value}</text>
 			<text x="50%" y="66%"
-				style={{fontSize: '18px', fontFamily: 'sans-serif', textAnchor: 'middle', dominantBaseline: 'middle'}}
+				styleName="text-title"
 				fill={`url(#${this.gradientId})`}>{title}</text>
 		</g>
 	}
@@ -213,7 +214,7 @@ export default class CircleChart extends React.Component {
 	render() {
 		return <svg xmlns={SVG_NS}
 				xmlnsXlink={XLINK_NS}
-				width="100%" height="100%" ref="svg"
+				width="100%" height="100%"
 				viewBox={`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
 				>
 			<defs>
