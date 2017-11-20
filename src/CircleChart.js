@@ -215,6 +215,7 @@ export default class CircleChart extends React.Component {
 		return <svg xmlns={SVG_NS}
 				xmlnsXlink={XLINK_NS}
 				width="100%" height="100%"
+				styleName="circel-chart-svg"
 				viewBox={`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
 				>
 			<defs>

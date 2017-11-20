@@ -35,7 +35,7 @@ var lessLoader = function(lessPath, isModules) {
 			options: {
 				importLoader: true,
 				modules: isModules,
-				localIdentName: isModules ? '[name]__[local]__[hash:base64:5]' : '[name]'
+				localIdentName: '[local]'
 			}
 		}, {
 			loader: 'postcss-loader',

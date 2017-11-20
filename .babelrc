@@ -12,7 +12,7 @@
 					}
 				},
 				"webpackHotModuleReloading": true,
-				"generateScopedName": "[name]__[local]__[hash:base64:5]",
+				"generateScopedName": "[local]",
 				"exclude": "node_modules"
 			}
 		]
