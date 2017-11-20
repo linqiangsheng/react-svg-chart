@@ -197,7 +197,9 @@ export default class CircleChart extends React.Component {
 	 */
 	drawContent() {
 		const { value = 70, max = 100, title = '使用率(%)'} = this.props;
-		const fontSize = 200 / (value + '').replace(/\./, '').length + 'px';
+		const length = (value + '').replace(/\./, '').length;
+		const fontSize = length === 1 ? 100 : 200 / length + 'px'
+		// const fontSize = 200 / (value + '').replace(/\./, '').length + 'px';
 		return <g>
 			<text x="50%" y="50%"
 				style={{fontSize: fontSize, fontFamily: 'sans-serif', fontWeight: 'bold', textAnchor: 'middle', dominantBaseline: 'middle'}}
