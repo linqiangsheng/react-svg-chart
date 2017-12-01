@@ -52,11 +52,24 @@ export default class CircleChart extends React.Component {
 	 */
 	drawArc() {
 		const {colors = ['#B78BEE', '#1790DC']} = this.props;
+		const pointColor = colors[0],
+			a = 0.4; //透明度
+		let r = 0, g = 0, b = 0;
+		if (/^#\w{6}$/.test(pointColor)) {
+			r = parseInt(pointColor.substr(1, 2), 16);
+			g = parseInt(pointColor.substr(3, 2), 16);
+			b = parseInt(pointColor.substr(5, 2), 16);
+		}
+		r = r === 0 ? 0 : r / 255;
+		g = g === 0 ? 0 : g / 255;
+		b = b === 0 ? 0 : b / 255;
 		return <g>
 			<defs>
-				<filter id={this.filterId} x="-1" y="-1" width="30" height="30">
-					<feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" />
-					<feGaussianBlur result="blurOut" in="offOut" stdDeviation="1" />
+				<filter id={this.filterId} x="-1" y="-1" width="60" height="60">
+					<feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+					<feColorMatrix result="matrixOut" in="offOut" type="matrix"
+						values={`${r} 0 0 0 0 0 ${g} 0 0 0 0 0 ${b} 0 0 0 0 0 0.4 0`}/>
+					<feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="2" />
 					<feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
 			    </filter>
 			</defs>
@@ -66,7 +79,7 @@ export default class CircleChart extends React.Component {
 				fill="none"
 				strokeLinecap="round"/>
 			<circle ref="point"
-				r="8" stroke="#FFF" strokeWidth="4" fill={colors[0]}
+				r="8" stroke="#FFF" strokeWidth="4" fill={pointColor}
 				filter={`url(#${this.filterId})`}/>
 		</g>
 	}
