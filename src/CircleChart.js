@@ -51,11 +51,12 @@ export default class CircleChart extends React.Component {
 	 * @return {[type]} [description]
 	 */
 	drawArc() {
+		const {colors = ['#B78BEE', '#1790DC']} = this.props;
 		return <g>
 			<defs>
 				<filter id={this.filterId} x="-1" y="-1" width="30" height="30">
 					<feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" />
-					<feGaussianBlur result="blurOut" in="offOut" stdDeviation="2" />
+					<feGaussianBlur result="blurOut" in="offOut" stdDeviation="1" />
 					<feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
 			    </filter>
 			</defs>
@@ -65,7 +66,7 @@ export default class CircleChart extends React.Component {
 				fill="none"
 				strokeLinecap="round"/>
 			<circle ref="point"
-				r="8" stroke="#FFF" strokeWidth="4" fill="#7C9BE1"
+				r="8" stroke="#FFF" strokeWidth="4" fill={colors[0]}
 				filter={`url(#${this.filterId})`}/>
 		</g>
 	}
