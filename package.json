@@ -1,6 +1,6 @@
 {
     "name": "react-svg-oops",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "this is package for drawing charts easily.",
     "main": "lib/index.js",
     "scripts": {
