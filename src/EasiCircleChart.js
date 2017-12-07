@@ -188,7 +188,7 @@ export default class EasiCircleChart extends React.Component {
 				<tspan>{value > max ? max : value}</tspan>
 				<tspan dy="10" style={{fontSize: fontSize * 1 / 3 + 'px'}}>%</tspan>
 			</text>
-			<text x="50%" y="66%"
+			<text x="50%" y="70%"
 				styleName="text-title"
 				fill='#999'>{title}</text>
 		</g>

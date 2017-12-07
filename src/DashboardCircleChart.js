@@ -233,7 +233,7 @@ export default class EasiCircleChart extends React.Component {
 				fill={`${colors[colors.length - 1]}`}>{value > max ? max : value}</text>
 			<text x="50%" y="70%"
 				styleName="text-title"
-				style={{fontSize: '24px'}}
+				style={{fontSize: '30px'}}
 				fill={`#9C9C9C`}>{title}</text>
 			{isScaleVisible && [
 				<text x={start.x + 3} y={start.y + 30}

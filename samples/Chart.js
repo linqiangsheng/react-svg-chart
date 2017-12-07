@@ -8,9 +8,14 @@ export default class Chart extends React.Component {
 	render() {
 		return (
 			<div style={{width: '180px', height: '180px'}}>
-				<EasiCircleChart value={60.2} animationTime={500}
+				<EasiCircleChart value={80.} animationTime={500}
 					max={100}
-					colors={['#00D561']} title="使用率(%)"/>
+					colors={['#00D561', '#FFD71E',  '#FFA86D', '#F6502F']} title="使用率(%)"/>
+				<DashboardCircleChart value={340} animationTime={500}
+					max={500}
+					isScaleVisible={true}
+					title="重度污染"
+					colors={['#00D561', '#FFD71E',  '#FFA86D', '#F6502F']}/>
 			</div>
 		);
 	}
