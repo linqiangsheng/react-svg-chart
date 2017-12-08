@@ -40,21 +40,21 @@ export default class DashboardCircleChart extends React.Component {
 		const {
 			colors = ['#B78BEE', '#1790DC']
 		} = this.props;
-		const percent = 100 / colors.length;
 		const preColors = filter(colors, (item, key) => {
-			return key <= Math.ceil(colors.length / 2)
+			return key <= Math.floor(colors.length / 2)
 		}), sufColors = colors.length === 1 ? colors : filter(colors,  (item, key) => {
-			return key >= Math.ceil(colors.length / 2)
-		})
+			return key >= Math.floor(colors.length / 2)
+		}), prePercent = 100 / (preColors.length - 1 || 1),
+			sufPercent = 100 / (sufColors.length - 1 || 1);
 		return <g>
-			<linearGradient id={this.gradientIdPre} x1="1" y1="1" x2="2" y2="0">
+			<linearGradient id={this.gradientIdPre} x1="0" y1="300" x2="50" y2="0" gradientUnits="userSpaceOnUse">
 				{map(preColors, (item, index) => {
-					return <stop key={item} offset={index * percent + '%'} style={{stopColor: item}}/>
+					return <stop key={item} offset={index * prePercent + '%'} style={{stopColor: item}}/>
 				})}
 			</linearGradient>
-			<linearGradient id={this.gradientIdSuf} x1="1" y1="0" x2="2" y2="1">
+			<linearGradient id={this.gradientIdSuf} x1="50" y1="0" x2="" y2="300" gradientUnits="userSpaceOnUse">
 				{map(sufColors, (item, index) => {
-					return <stop key={item} offset={index * percent + '%'} style={{stopColor: item}}/>
+					return <stop key={item} offset={index * sufPercent + '%'} style={{stopColor: item}}/>
 				})}
 			</linearGradient>
 		</g>
@@ -138,7 +138,7 @@ export default class DashboardCircleChart extends React.Component {
 	 */
 	move(prev, next, speed = 1) {
 		const {
-			beginAngel = ANGEL, max = 100
+			beginAngel = ANGEL, max = 100, colors = ['#B78BEE', '#1790DC']
 		} = this.props;
 
 		const {start, middle} = this.getPoints();
@@ -150,13 +150,16 @@ export default class DashboardCircleChart extends React.Component {
 		let nextPrev = 0;
 		if (prev * 2 <= max) {
 			this.elArcPre.setAttribute('d', `M${start.x} ${start.y} A ${ARC_R} ${ARC_R} 0 0 1 ${end.x} ${end.y}`);
+			this.elEndCircle.setAttribute('fill', `url(#${this.gradientIdPre})`);
 		} else {
 			this.elArcPre.setAttribute('d', `M${start.x} ${start.y} A ${ARC_R} ${ARC_R} 0 0 1 ${middle.x} ${middle.y}`);
 			this.elArcSuf.setAttribute('d', `M${middle.x} ${middle.y} A ${ARC_R} ${ARC_R} 0 0 1 ${end.x} ${end.y}`);
+			this.elEndCircle.setAttribute('fill', `url(#${this.gradientIdSuf})`);
 		}
 
 		this.elEndCircle.setAttribute('cy', end.y);
 		this.elEndCircle.setAttribute('cx', end.x);
+
 
 		if (prev < next) {
 			nextPrev = prev + speed > next ? next : prev + speed;
