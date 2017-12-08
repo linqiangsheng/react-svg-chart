@@ -224,7 +224,7 @@ export default class DashboardCircleChart extends React.Component {
 	 * @return {[type]} [description]
 	 */
 	drawContent() {
-		const { value = 70, max = 100, title = '使用率(%)', colors = ['#B78BEE', '#1790DC'], isScaleVisible = false} = this.props;
+		const { value = 70, max = 100, title = '使用率(%)', colors = ['#B78BEE', '#1790DC'], isScaleVisible = false, valueColor} = this.props;
 		const length = (value + '').replace(/\./, '').length;
 		const fontSize = length === 1 ? 100 : 230 / length + 'px';
 		const { start, end } = this.getPoints();
@@ -232,7 +232,7 @@ export default class DashboardCircleChart extends React.Component {
 			<text x="50%" y="47%"
 				style={{fontSize: fontSize}}
 				styleName="text-value"
-				fill={`${colors[colors.length - 1]}`}>{value > max ? max : value}</text>
+				fill={`${valueColor ? valueColor : colors[colors.length - 1]}`}>{value > max ? max : value}</text>
 			<text x="50%" y="70%"
 				styleName="text-title"
 				style={{fontSize: '30px'}}
