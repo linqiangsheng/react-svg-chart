@@ -15,7 +15,7 @@ const ANGEL = 40, //起始角度
 	FRAME_NUMBER = 60; //假设浏览器每秒60祯
 
 
-export default class EasiCircleChart extends React.Component {
+export default class DashboardCircleChart extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -46,7 +46,6 @@ export default class EasiCircleChart extends React.Component {
 		}), sufColors = colors.length === 1 ? colors : filter(colors,  (item, key) => {
 			return key >= Math.ceil(colors.length / 2)
 		})
-		console.log(preColors, sufColors);
 		return <g>
 			<linearGradient id={this.gradientIdPre} x1="1" y1="1" x2="2" y2="0">
 				{map(preColors, (item, index) => {
@@ -236,9 +235,9 @@ export default class EasiCircleChart extends React.Component {
 				style={{fontSize: '30px'}}
 				fill={`#9C9C9C`}>{title}</text>
 			{isScaleVisible && [
-				<text x={start.x + 3} y={start.y + 30}
+				<text key={'scale-0'} x={start.x + 3} y={start.y + 30}
 					styleName="text-scale">0</text>,
-				<text x={end.x} y={end.y + 30}
+				<text key={'scale-max'} x={end.x} y={end.y + 30}
 					styleName="text-scale">{max}</text>
 				]}
 		</g>
