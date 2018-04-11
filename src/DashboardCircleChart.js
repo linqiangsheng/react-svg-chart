@@ -52,7 +52,7 @@ export default class DashboardCircleChart extends React.Component {
 					return <stop key={item} offset={index * prePercent + '%'} style={{stopColor: item}}/>
 				})}
 			</linearGradient>
-			<linearGradient id={this.gradientIdSuf} x1="50" y1="0" x2="" y2="300" gradientUnits="userSpaceOnUse">
+			<linearGradient id={this.gradientIdSuf} x1="50" y1="0" x2="0" y2="300" gradientUnits="userSpaceOnUse">
 				{map(sufColors, (item, index) => {
 					return <stop key={item} offset={index * sufPercent + '%'} style={{stopColor: item}}/>
 				})}
